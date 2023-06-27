@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>count_of_custom__c</fullName>
+    <externalId>false</externalId>
+    <label>count of custom</label>
+    <summaryForeignKey>Tax_payed__c.Tax_payer_detail__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

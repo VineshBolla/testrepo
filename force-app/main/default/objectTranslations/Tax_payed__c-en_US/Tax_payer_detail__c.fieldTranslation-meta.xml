@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <label><!-- Tax payer detail --></label>
+        <name>Tax_payer_detail__c</name>
+        <relationshipLabel><!-- Tax paid per months --></relationshipLabel>
+    </CustomFieldTranslation>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>custom_layout</fullName>
+    <fields>Name</fields>
+    <fields>Max_tax_paid__c</fields>
+    <fields>sum_of_amount__c</fields>
+    <fields>Avg__c</fields>
+    <label>custom layout</label>
+</CompactLayout>

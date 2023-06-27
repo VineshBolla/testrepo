@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Role__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Please select appropriate role</inlineHelpText>
+    <label>Role</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Domain__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Test Manager</fullName>
+                <default>false</default>
+                <label>Test Manager</label>
+            </value>
+            <value>
+                <fullName>Test lead</fullName>
+                <default>false</default>
+                <label>Test lead</label>
+            </value>
+            <value>
+                <fullName>Salesforce Admin</fullName>
+                <default>false</default>
+                <label>Salesforce Admin</label>
+            </value>
+            <value>
+                <fullName>Salesforce Dev</fullName>
+                <default>false</default>
+                <label>Salesforce Dev</label>
+            </value>
+            <value>
+                <fullName>Engineer</fullName>
+                <default>false</default>
+                <label>Engineer</label>
+            </value>
+            <value>
+                <fullName>Sr Engineer</fullName>
+                <default>false</default>
+                <label>Sr Engineer</label>
+            </value>
+            <value>
+                <fullName>IT</fullName>
+                <default>false</default>
+                <label>IT</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Salesforce</controllingFieldValue>
+            <valueName>Salesforce Admin</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salesforce</controllingFieldValue>
+            <valueName>Salesforce Dev</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Java</controllingFieldValue>
+            <controllingFieldValue>DotNet</controllingFieldValue>
+            <valueName>Engineer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Java</controllingFieldValue>
+            <controllingFieldValue>DotNet</controllingFieldValue>
+            <valueName>Sr Engineer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tech support</controllingFieldValue>
+            <valueName>IT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Testing</controllingFieldValue>
+            <valueName>Test Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Testing</controllingFieldValue>
+            <valueName>Test lead</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

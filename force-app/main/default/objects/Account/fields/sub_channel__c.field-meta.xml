@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>sub_channel__c</fullName>
+    <externalId>false</externalId>
+    <label>sub channel</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DE</fullName>
+                <default>false</default>
+                <label>DE</label>
+            </value>
+            <value>
+                <fullName>Global</fullName>
+                <default>false</default>
+                <label>Global</label>
+            </value>
+            <value>
+                <fullName>HBC</fullName>
+                <default>false</default>
+                <label>HBC</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

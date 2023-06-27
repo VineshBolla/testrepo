@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <label><!-- subject --></label>
+        <name>subject__c</name>
+        <picklistValues>
+            <masterLabel>english</masterLabel>
+            <translation><!-- english --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>maths</masterLabel>
+            <translation><!-- maths --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>science</masterLabel>
+            <translation><!-- science --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>social</masterLabel>
+            <translation><!-- social --></translation>
+        </picklistValues>
+    </CustomFieldTranslation>

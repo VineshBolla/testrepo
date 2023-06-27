@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Please select appropriate role --></help>
+        <label><!-- Role --></label>
+        <name>Role__c</name>
+        <picklistValues>
+            <masterLabel>Engineer</masterLabel>
+            <translation><!-- Engineer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IT</masterLabel>
+            <translation><!-- IT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce Admin</masterLabel>
+            <translation><!-- Salesforce Admin --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce Dev</masterLabel>
+            <translation><!-- Salesforce Dev --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sr Engineer</masterLabel>
+            <translation><!-- Sr Engineer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Test Manager</masterLabel>
+            <translation><!-- Test Manager --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Test lead</masterLabel>
+            <translation><!-- Test lead --></translation>
+        </picklistValues>
+    </CustomFieldTranslation>

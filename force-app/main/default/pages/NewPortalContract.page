@@ -1,0 +1,315 @@
+<apex:page controller="CustomLookup_Controller" lightningStylesheets="true" id="pageId" showHeader="false" sidebar="false" docType="html-5.0" applyBodyTag="false" applyHtmlTag="true" cache="false">
+
+    <head>
+
+
+        <!-- meta tag is used for dynamic scaling of the width of page according to device for responsive design. -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" />
+
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" />
+
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" />
+
+        <link rel="stylesheet"  type="text/css" href="https://cdn.jsdelivr.net/npm/@salesforce-ux/design-system@2.10.2/assets/styles/salesforce-lightning-design-system.css" />
+
+        <script src="https://underscorejs.org/underscore-min.js" />
+
+
+        <style>
+
+            .loadingStart {
+                z-index: 1000; 
+                position: fixed;
+            }
+
+            /* .ui-autocomplete-loading { background:url('img/indicator.gif') no-repeat right center } */
+            .ui-autocomplete-loading { background:url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/images/ui-anim_basic_16x16.gif) no-repeat right center }
+        
+        </style>
+        
+       <style>
+			.btn {
+  			border: none;
+  			border-radius: 4px;
+  			padding: 10px 20px;
+            font-size: 16px;
+}
+</style>
+                                                      
+
+    </head>
+    
+    
+    <script>
+
+    
+    function createContract(){
+
+        createContractAction();
+    }
+
+    function result(){
+
+        alert('Contract Created Successfully.'); 
+        
+        location.reload(); 
+        
+    }
+    
+    //Function to fetch lookup field data and show in dropdown list.
+    function createAutocomplete(element, e){
+
+        e.preventDefault();
+
+        let originalId = element.id;
+
+                
+            $( "input[class*='slds-input lookupInputClass']" ).autocomplete({
+
+                source: function(request, response) {
+
+                    
+                    // Javascript Remoting used to fetch the lookup data from apex controller.
+                    Visualforce.remoting.Manager.invokeAction( '{!$RemoteAction.CustomLookup_Controller.getLookupData}',
+                    
+                    // Here replace 'AccountId' with the API Name of the lookup Field of which you want to fetch the data.
+                    request.term, 'AccountId',
+        
+                    function(result, event){
+        
+                        if (event.status && result != null && result != undefined && result.length > 0)
+        
+                        {
+
+                            var data = [];
+
+                            //Iterating through the result to create data for the  dropdown list.
+                            // _.unescape() is the function of the UnderscoreJs Library to decode xml special characters back to normal characters.
+                            result.forEach(function(element, index) {
+                                var objData = {
+                                    value: element.Id,
+                                    label: _.unescape(element.Name)
+                                };
+
+                                data.push(objData);
+                            });
+        
+                            response(data);
+        
+                        }
+        
+                        else
+        
+                        {
+                            //Set No result found on dropdown list if no data is retrieved.
+                            response([{ value: -1, label: 'No results found.'}]);
+        
+                        }
+        
+                    });
+                },
+                // Select function to set the selected record value from the dropdown list into lookup field
+                select:function( event, ui ){
+
+                    event.preventDefault();
+
+                    if(ui.item.value != null && ui.item.value != (-1)){
+
+                    $(element).val(ui.item.label);
+
+                    let hiddenId = "input[type='hidden'][id$='"+originalId+"_lkid']";
+
+                    let hiddenOldId = "input[type='hidden'][id$='"+originalId+"_lkold']";
+                    
+                    let hiddenMod = "input[type='hidden'][id$='"+originalId+"_mod']";
+
+                    
+                    //Blur Function needs to be called inorder to prevent the data of lookup field from vanishing.
+                    $(element).blur();
+
+                    //Id of the lookup field is stored in this field by apex:inputfield
+                    $(''+hiddenId).val(ui.item.value);
+                    
+                    //Name of the selected record is stored in this field by apex:inputfield
+                    $(''+hiddenOldId).val(ui.item.label);
+
+                    $(''+hiddenMod).val('1');
+
+                    } else {
+                        
+                    }
+        
+                },
+                
+                focus: function(event, ui) {
+                    
+                    event.preventDefault();
+
+                    //$(element).val(ui.item.label);
+                }
+        
+            });
+
+        }
+
+    </script>
+        
+    <script>
+  		function confirmCancel() {
+      	var isCancel = confirm("Are you sure you wish to cancel?");
+      	if (isCancel) return true;
+  
+     	return false;
+  	}  
+  	</script>
+
+
+    <body>
+        
+        
+		<apex:sectionHeader title="Create Contract" subtitle="Step 1 of 3"/>
+        <apex:form id="formId">
+
+        <!-- actionFunction used for creating contact record. -->
+        <apex:actionFunction name="createContractAction" action="{!createNewContract}" status="loadingStatus" oncomplete="result(); return false;" />
+
+
+        <!-- action status used to show loading spinner when actionFunction is called-->
+        <apex:actionStatus id="loadingStatus" stopText="" startStyleClass="loadingStart">
+
+            <apex:facet name="start">
+    
+            <div class="demo-only demo-only demo-only_viewport demo--inverse" style="height:6rem;">
+                <div class="slds-spinner_container slds-is-fixed">
+                <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                    <span class="slds-assistive-text">Loading</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+                </div>
+            </div>
+    
+            </apex:facet>
+    
+        </apex:actionStatus>
+
+
+
+
+
+        <div style="margin-left: 1.50rem; margin-right: 1.50rem; margin-top: 2rem;">
+
+            
+            <!-- bootstrap card used for the UI.  -->
+            <div class="card shadow bg-light mb-3 w-100">
+                
+                <!--<div id="nav-steps-submit">
+					<apex:inputHidden id="myHiddenField"/>
+						<apex:inputHidden id="myHiddenField2"/>
+						<apex:actionFunction name="goToNewPortalContractFunction" action="{!goToNewPortalContract}"/>
+						<apex:actionFunction name="goToNewPortalOrderFunction" action="{!goToNewPortalOrder}"/>
+                    -->
+                    <table>
+                         <tr>
+                    <td class="nav-steps-1">
+					<apex:commandButton action="{!goToNewPortalContract}" onmousedown="goToNewPortalContract();" value="Contract"  style="background-color: #4CAF50; color: white;" />
+					</td>
+                    
+                    
+                    <td class="nav-steps-2">
+					<apex:commandButton action="{!goToNewPortalOrder}" onmousedown="goToNewPortalOrder();" value="order" styleClass="btn" style="background-color: #909090; color: white;"/>
+					</td>
+                        </tr>
+                    </table>
+                   <!-- </div>-->
+
+                <!-- Header of the card. -->
+                <div class="card-header text-center slds-text-heading_large">
+                    New Contract Record
+                </div>
+                
+
+                <!-- Body of the card which contains the contact form -->
+                <div class="card-body">
+
+                    <!-- Form group container for input field -->
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">Contract Term</label>
+                        <div class="col-sm-11">
+                            
+                            <apex:inputField id="ContractTerm" styleClass="slds-input" value="{!contractObj['ContractTerm']}" />
+                            
+                        </div>
+                    </div>
+
+                    <!-- Form group container for input field -->
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">Start Date</label>
+                        <div class="col-sm-11">
+                            
+                            <apex:inputField id="StartDate" required="true" styleClass="slds-input" value="{!contractObj['StartDate']}" />
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Form group container for input field -->
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">Status</label>
+                        <div class="col-sm-11">
+                            
+                            <apex:inputField id="Status" required="true" styleClass="slds-input" value="{!contractObj['Status']}" />
+                            
+                        </div>
+                    </div>
+
+                    <!-- Form group container for input field -->
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">Account</label>
+                        <div class="col-sm-11">
+                            
+                            <!-- Use lookupInputClass to style lookup field according to your requirement. 
+                            createAutocomplete function is called onclick to create it as autocomplete and show result in dropdown list -->
+                            <apex:inputField id="lookupUniqueId" styleClass="slds-input lookupInputClass" value="{!contractObj['AccountId']}" onclick="createAutocomplete(this, event); return false;" />
+                            
+                            <script>
+                            
+                            // Script used to remove the standard magnifying glass icon of the lookup field
+                            $(document).ready(function() {
+    
+                            $("a[class='slds-input lookupInputClass']").each(function( index ) {
+                                
+                                $(this).remove();
+
+                            });
+
+                            });
+                            
+                            </script>
+                        </div>
+                    </div>
+
+                    <!-- Button used to create the contact record -->
+                    <div class="row justify-content-center">
+                        <apex:commandButton action="{!step2}" value="Next"/>
+                        
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        </apex:form>
+
+    </body>
+
+
+</apex:page>

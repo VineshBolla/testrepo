@@ -1,0 +1,195 @@
+<apex:page controller="NewPortalOrderExt" lightningStylesheets="true" id="pageId" showHeader="false" sidebar="false" docType="html-5.0" applyBodyTag="false" applyHtmlTag="true" cache="false">
+
+    <head>
+
+
+        <!-- meta tag is used for dynamic scaling of the width of page according to device for responsive design. -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" />
+
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" />
+
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" />
+
+        <link rel="stylesheet"  type="text/css" href="https://cdn.jsdelivr.net/npm/@salesforce-ux/design-system@2.10.2/assets/styles/salesforce-lightning-design-system.css" />
+
+        <script src="https://underscorejs.org/underscore-min.js" />
+
+
+        <style>
+
+            .loadingStart {
+                z-index: 1000; 
+                position: fixed;
+            }
+
+            /* .ui-autocomplete-loading { background:url('img/indicator.gif') no-repeat right center } */
+            .ui-autocomplete-loading { background:url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/images/ui-anim_basic_16x16.gif) no-repeat right center }
+        
+        </style>
+
+    </head>
+    
+    
+    <script>
+
+    
+    function createOrder(){
+
+        createOrderAction();
+    }
+
+    function result(){
+
+        alert('Order Created Successfully.'); 
+        
+        location.reload(); 
+        
+    }
+    
+    
+
+    </script>
+        
+    <script>
+  		function confirmCancel() {
+      	var isCancel = confirm("Are you sure you wish to cancel?");
+      	if (isCancel) return true;
+  
+     	return false;
+  	}  
+  	</script>
+
+
+    <body>
+        
+        
+		<apex:sectionHeader title="Create Order" subtitle="Step 2 of 3"/>
+        <apex:form id="formId">
+
+        <!-- actionFunction used for creating contact record. -->
+        <apex:actionFunction name="createOrderAction" action="{!createNewOrder}" status="loadingStatus" oncomplete="result(); return false;" />
+
+
+        <!-- action status used to show loading spinner when actionFunction is called-->
+        <apex:actionStatus id="loadingStatus" stopText="" startStyleClass="loadingStart">
+
+            <apex:facet name="start">
+    
+            <div class="demo-only demo-only demo-only_viewport demo--inverse" style="height:6rem;">
+                <div class="slds-spinner_container slds-is-fixed">
+                <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                    <span class="slds-assistive-text">Loading</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+                </div>
+            </div>
+    
+            </apex:facet>
+    
+        </apex:actionStatus>
+
+
+
+
+
+        <div style="margin-left: 1.50rem; margin-right: 1.50rem; margin-top: 2rem;">
+
+            
+            <!-- bootstrap card used for the UI.  -->
+            <div class="card shadow bg-light mb-3 w-100">
+                
+                <table>
+                         <tr>
+                    <td class="nav-steps-1">
+					<apex:commandButton action="{!goToNewPortalContract}" onmousedown="goToNewPortalContract();" value="Contract"  style="background-color: #4CAF50; color: white;" />
+					</td>
+                    
+                    
+                    <td class="nav-steps-2">
+					<apex:commandButton action="{!goToNewPortalOrder}" onmousedown="goToNewPortalOrder();" value="order" styleClass="btn" style="background-color: #909090; color: white;"/>
+					</td>
+                        </tr>
+                    </table>
+
+                <!-- Header of the card. -->
+                <div class="card-header text-center slds-text-heading_large">
+                    New Order Record
+                </div>
+                
+                <!--<apex:pageBlockButtons >
+          		<apex:commandButton action="{!step2}" value="Next"/>
+          		<apex:commandButton action="{!cancel}" value="Cancel" 
+                              onclick="return confirmCancel()" immediate="true"/>
+        		</apex:pageBlockButtons> -->
+
+                <!-- Body of the card which contains the contact form -->
+                <div class="card-body">
+
+                    <!-- Form group container for input field -->
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">Contract Number</label>
+                        <div class="col-sm-11">
+                            
+                            <apex:inputField id="ContractNumber" styleClass="slds-input" value="{!orderObj['ContractId']}" />
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Form group container for input field -->
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">Status</label>
+                        <div class="col-sm-11">
+                            
+                            <apex:inputField id="Status" required="true" styleClass="slds-input" value="{!orderObj['Status']}" />
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    <!-- Form group container for input field -->
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">EffectiveDate</label>
+                        <div class="col-sm-11">
+                            
+                            <apex:inputField id="EffectiveDate" required="true" styleClass="slds-input" value="{!orderObj['EffectiveDate']}" />
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">AccountId</label>
+                        <div class="col-sm-11">
+                            
+                            <apex:inputField id="AccountId" required="true" styleClass="slds-input" value="{!orderObj['AccountId']}" />
+                            
+                        </div>
+                    </div>
+                    
+                    
+
+
+                    <!-- Button used to create the contact record -->
+                    <div class="row justify-content-center">
+                        <button class="slds-button slds-button--brand" onclick="createOrder(); return false;">Create Order</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        </apex:form>
+
+    </body>
+
+
+</apex:page>

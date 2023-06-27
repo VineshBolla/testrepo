@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>validate1</fullName>
+    <active>false</active>
+    <errorConditionFormula>TEXT( Domain__c) =&quot;Salesforce&quot;
+ &amp;&amp;
+ TEXT(Career__r.Domain__c) = &quot;Java&quot;  &amp;&amp; TEXT(Career__r.Domain__c) = &quot;DotNet&quot; &amp;&amp; TEXT(Career__r.Domain__c) = &quot;Tech support&quot; &amp;&amp; TEXT(Career__r.Domain__c) = &quot;Testing&quot;</errorConditionFormula>
+    <errorMessage>the value is incorrect</errorMessage>
+</ValidationRule>

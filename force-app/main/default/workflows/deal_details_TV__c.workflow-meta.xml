@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>LCD_WFR</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>LCD_record_type</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>LCD WFR</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>LED_WFR</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>LED_RT</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>LED WFR</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>plasama_WFR</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>plasama_RT</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>plasama WFR</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>LCD WFR</fullName>
+        <actions>
+            <name>LCD_WFR</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>deal_details_TV__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>LCD record type</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>LED WFR</fullName>
+        <actions>
+            <name>LED_WFR</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>deal_details_TV__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>LED RT</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>plasama WFR</fullName>
+        <actions>
+            <name>plasama_WFR</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>deal_details_TV__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>plasama RT</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

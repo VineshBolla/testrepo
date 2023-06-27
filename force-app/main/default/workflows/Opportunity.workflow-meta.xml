@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>X15days_before_closeDate</fullName>
+        <description>15days before closeDate</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/opportunity_close_date</template>
+    </alerts>
+    <alerts>
+        <fullName>closedate_opportunity</fullName>
+        <description>closedate opportunity</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <recipient>vinesh696@gmail.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/opportunity_close_date</template>
+    </alerts>
+    <alerts>
+        <fullName>email_1</fullName>
+        <description>email 1</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>vinesh696@gmail.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>vineshbolla3@gmail.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/candidate_template</template>
+    </alerts>
+    <alerts>
+        <fullName>email_alert</fullName>
+        <description>email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>vinesh696@gmail.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>vineshbolla3@gmail.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/opportunity_close_date</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>approval_date</fullName>
+        <field>Date_Approved__c</field>
+        <formula>TODAY()</formula>
+        <name>approval date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>approval_status</fullName>
+        <field>ApprovalStatus__c</field>
+        <literalValue>Submitted</literalValue>
+        <name>approval status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>approval_status1</fullName>
+        <field>ApprovalStatus__c</field>
+        <literalValue>Approved</literalValue>
+        <name>approval status1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>recall_update</fullName>
+        <field>ApprovalStatus__c</field>
+        <literalValue>Recalled</literalValue>
+        <name>recall update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>rejection_action</fullName>
+        <field>ApprovalStatus__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>rejection action</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>submitted_date</fullName>
+        <field>Date_submitted__c</field>
+        <formula>TODAY()</formula>
+        <name>submitted date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>2opportunity closeDate</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Amount</field>
+            <operation>greaterThan</operation>
+            <value>100000</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X15days_before_closeDate</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Opportunity.CloseDate</offsetFromField>
+            <timeLength>-15</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>closedate_opportunity</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Opportunity.CloseDate</offsetFromField>
+            <timeLength>-30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>follow_up_task_for_the_opportunity</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Opportunity.CloseDate</offsetFromField>
+            <timeLength>5</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <tasks>
+        <fullName>follow_up_task_for_the_opportunity</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Please update the Deal</description>
+        <dueDateOffset>30</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Opportunity.CloseDate</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>follow-up task for the opportunity</subject>
+    </tasks>
+</Workflow>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>PrioritySLAEmailalert</fullName>
+        <description>PrioritySLAEmailAlert</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <recipients>
+            <recipient>vinesh696@gmail.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/candidate_template</template>
+    </alerts>
+    <alerts>
+        <fullName>prioritySLA_emailAlert</fullName>
+        <description>prioritySLA emailAlert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>vineshbolla3@gmail.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/candidate_template</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>ChangePriorityToHigh</fullName>
+        <field>Priority</field>
+        <literalValue>High</literalValue>
+        <name>Changes the case priority to high.</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>prioritySLA</fullName>
+        <actions>
+            <name>prioritySLA_emailAlert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.SLA__c</field>
+            <operation>equals</operation>
+            <value>Platinum</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Priority</field>
+            <operation>equals</operation>
+            <value>High</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

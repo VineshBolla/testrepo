@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>eligibility</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR (
+	AND(TEXT(Career__r.Domain__c) == &quot;Salesforce&quot;, TEXT(Domain__c) &lt;&gt; &quot;Salesforce&quot;),
+	AND(TEXT(Career__r.Domain__c) == &quot;Java&quot;, TEXT(Domain__c) &lt;&gt; &quot;Java&quot;),
+	AND(TEXT(Career__r.Domain__c) == &quot;DotNet&quot;, TEXT(Domain__c) &lt;&gt; &quot;DotNet&quot;),
+	AND(TEXT(Career__r.Domain__c) == &quot;Tech support&quot;, TEXT(Domain__c) &lt;&gt; &quot;Tech support&quot;),
+	AND(TEXT(Career__r.Domain__c) == &quot;Testing&quot;, TEXT(Domain__c) &lt;&gt; &quot;Testing&quot;)
+)</errorConditionFormula>
+    <errorMessage>you are not eligable</errorMessage>
+</ValidationRule>
